@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
-import TextField from '@material-ui/core/TextField';
+import {
+  Button,
+  TextField,
+  Dialog,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Slide
+} from '@material-ui/core';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import { Close } from '@material-ui/icons';
 import { itemsRef, storage } from '../../firebase';
-import firebase from 'firebase/app';
 import RecipesList from '../AllRecipes/RecipesList';
 import Header from '../Header';
 
@@ -34,50 +35,54 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function FullScreenDialog() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [fileImage, setFileImage] = React.useState({
+  const [open, setOpen] = useState(false);
+  const [fileImage, setFileImage] = useState({
     file: '',
     imagePreviewUrl: ''
   });
-  const [recipe, setRecipe] = React.useState({
+  const [recipe, setRecipe] = useState({
     title: '',
     ingredients: '',
     amount: '',
     procedure: ''
   });
-  const [items, setItems] = React.useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     // code to run on component mount
     itemsRef.ref('items').on('value', snapshot => {
-      let recipes = snapshot.val();
-      let newItems = [];
+      const recipes = snapshot.val();
+      const newItems = [];
       for (let oneRecipe in recipes) {
+        const { title, ingredients, amount, procedure, imageUrl } = recipes[
+          oneRecipe
+        ];
         newItems.push({
-          title: recipes[oneRecipe].title,
-          ingredients: recipes[oneRecipe].ingredients,
-          amount: recipes[oneRecipe].amount,
-          procedure: recipes[oneRecipe].procedure,
-          image: recipes[oneRecipe].imageUrl
+          title,
+          ingredients,
+          amount,
+          procedure,
+          image: imageUrl
         });
       }
       setItems(newItems);
     });
   }, []);
 
-  let item;
+  const handleImagePreviewUrl = () => {
+    const { imagePreviewUrl } = fileImage;
+    if (imagePreviewUrl) {
+      return (
+        <img
+          src={imagePreviewUrl}
+          alt="preview"
+          style={{ width: 'auto', height: '100px' }}
+        />
+      );
+    }
+    return null;
+  };
 
-  let { imagePreviewUrl } = fileImage;
-  let $imagePreview = null;
-  if (imagePreviewUrl) {
-    $imagePreview = (
-      <img
-        src={imagePreviewUrl}
-        alt="preview"
-        style={{ width: 'auto', height: '100px' }}
-      />
-    );
-  }
   function checkRecipes() {
     console.log(items);
   }
@@ -88,61 +93,66 @@ export default function FullScreenDialog() {
   function handleClose() {
     setOpen(false);
   }
-  function uploadFile() {
-    let { file } = fileImage;
-    let filename = file.name;
-    let storageRef = storage.ref('/recipeImages/' + filename);
-    let uploadTask = storageRef.put(file);
 
-    uploadTask.on(
-      'state_changed',
-      function(snapshot) {},
-      function(error) {},
-      function() {
-        uploadTask.snapshot.ref.getDownloadURL().then(function(URL) {
-          let downloadURL = URL;
-          console.log('File available at', URL);
-          item = {
-            title: recipe.title,
-            ingredients: recipe.ingredients,
-            amount: recipe.amount,
-            procedure: recipe.procedure,
-            imageUrl: downloadURL
-          };
-          itemsRef.ref('items').push(item);
-          setRecipe({
-            title: '',
-            ingredients: '',
-            amount: '',
-            procedure: ''
+  function uploadToDatabase(downloadURL) {
+    const item = {
+      title: recipe.title,
+      ingredients: recipe.ingredients,
+      amount: recipe.amount,
+      procedure: recipe.procedure
+    };
+    if (downloadURL) {
+      item.imageUrl = downloadURL;
+    }
+    itemsRef.ref('items').push(item);
+    setRecipe({
+      title: '',
+      ingredients: '',
+      amount: '',
+      procedure: ''
+    });
+  }
+
+  function uploadFile() {
+    const { file } = fileImage;
+    const filename = file.name;
+    const storageRef = storage.ref('/recipeImages/' + filename);
+    if (file) {
+      const uploadTask = storageRef.put(file);
+      uploadTask.on(
+        'state_changed',
+        function(snapshot) {},
+        function(error) {},
+        function() {
+          uploadTask.snapshot.ref.getDownloadURL().then(function(URL) {
+            uploadToDatabase(URL);
+            console.log('File available at', URL);
           });
-        });
-      }
-    );
+        }
+      );
+    } else {
+      uploadToDatabase();
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-
     uploadFile();
-    //setFileImage({
-    //file: '',
-    //imagePreviewUrl: ''
-    //});
   }
 
-  function handleOnChange(e) {
+  function handleOnChange({ target }) {
+    const { value, name } = target;
     setRecipe({
       ...recipe,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   }
 
   function _handleImageChange(e) {
     e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    const { files } = e.target;
+    const reader = new FileReader();
+    const file = files[0];
 
     reader.onloadend = () => {
       setFileImage({
@@ -185,7 +195,7 @@ export default function FullScreenDialog() {
                 onClick={handleClose}
                 aria-label="Close"
               >
-                <CloseIcon />
+                <Close />
               </IconButton>
               <Typography variant="h6" className={classes.title}>
                 Add New Recipe!
@@ -240,7 +250,7 @@ export default function FullScreenDialog() {
             <div>
               <input type="file" onChange={_handleImageChange} />
             </div>
-            {$imagePreview}
+            {handleImagePreviewUrl()}
           </div>
           <input type="submit" value="Submit" />
         </form>

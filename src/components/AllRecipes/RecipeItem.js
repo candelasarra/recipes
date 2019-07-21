@@ -29,7 +29,9 @@ const RecipeItem = ({ recipe, onRecipeSelect }) => {
             className={classes.media}
             image={recipe.image}
             title={recipe.title}
-          />
+          >
+            {!recipe.image && <Typography />}
+          </CardMedia>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {recipe.title}

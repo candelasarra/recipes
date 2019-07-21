@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RecipeItem from './RecipeItem';
 import RecipeDetail from './RecipeDetail';
 import Grid from '@material-ui/core/Grid';
 
 const RecipesList = ({ items }) => {
-  const [componentRender, setComponentRender] = React.useState({
+  const [componentRender, setComponentRender] = useState({
     list: true,
     detail: false,
     chosenRecipe: null
@@ -24,25 +24,14 @@ const RecipesList = ({ items }) => {
     });
   };
 
-  const renderedList = items.map((item, index) => {
-    return (
-      <RecipeItem key={index} recipe={item} onRecipeSelect={onRecipeSelect} />
-    );
-  });
+  const renderedList = items.map((item, index) => (
+    <RecipeItem key={index} recipe={item} onRecipeSelect={onRecipeSelect} />
+  ));
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div>
-        <Grid
-          container
-          spacing={8}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gridColumnGap: '1%',
-            gridTemplateRows: 'repeat(auto, auto)',
-            justifyContent: 'space-around'
-          }}
-        >
+        <Grid container spacing={8} justify="center">
           {componentRender.list && renderedList}
         </Grid>
       </div>
