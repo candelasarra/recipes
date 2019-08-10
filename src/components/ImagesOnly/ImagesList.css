@@ -1,0 +1,52 @@
+.image:hover {
+  opacity: 0.75;
+}
+.image2:hover {
+  opacity: 0.75;
+}
+.image {
+  position: relative;
+  width: 33.33%;
+  padding: 0.2%;
+}
+.image2 {
+  width: 80%;
+  padding: 0.2%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.flexbox {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 210vw;
+}
+.flexbox2 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: auto;
+  justify-content: center;
+}
+.imageTag {
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 950px) {
+  .flexbox {
+    height: 220vw;
+  }
+  .image {
+    width: 50%;
+  }
+}
+@media (max-width: 667px) {
+  .flexbox {
+    height: auto;
+  }
+  .image {
+    width: 100%;
+  }
+}

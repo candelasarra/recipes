@@ -15,6 +15,11 @@ import { Close } from '@material-ui/icons';
 import { itemsRef, storage } from '../../firebase';
 import RecipesList from '../AllRecipes/RecipesList';
 import Header from '../Header';
+import ButtonAddNew from '../AddNew/ButtonAddNew';
+import ImagesList from '../ImagesOnly/ImagesList';
+import { Switch, Route, Link } from 'react-router-dom';
+import RecipeDetail from '../AllRecipes/RecipeDetail';
+import Home from '../home/Home';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -47,14 +52,18 @@ export default function FullScreenDialog() {
     procedure: ''
   });
   const [items, setItems] = useState([]);
+  const [recipeKeys, setRecipeKeys] = useState([]);
+  const imagesData = items.filter(item => (item.image ? true : false));
 
   useEffect(() => {
     // code to run on component mount
     itemsRef.ref('items').on('value', snapshot => {
       const recipes = snapshot.val();
+      setRecipeKeys(snapshot.val());
       const newItems = [];
+
       for (let oneRecipe in recipes) {
-        const { title, ingredients, amount, procedure, imageUrl } = recipes[
+        const { title, ingredients, amount, procedure, imageUrl, id } = recipes[
           oneRecipe
         ];
         newItems.push({
@@ -62,10 +71,14 @@ export default function FullScreenDialog() {
           ingredients,
           amount,
           procedure,
+          id,
           image: imageUrl
         });
       }
-      setItems(newItems);
+      const recipesWithId = newItems.map((recipe, index) => {
+        return (recipe = { ...recipe, id: index });
+      });
+      setItems(recipesWithId);
     });
   }, []);
 
@@ -175,8 +188,13 @@ export default function FullScreenDialog() {
       >
         <div style={{ height: '100%', width: '100%' }}>
           <Header />
-          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-            Add New Recipe!
+
+          <ButtonAddNew handleClickOpen={handleClickOpen} />
+          <Button variant="outlined" color="primary">
+            <Link to="/images">Images List!</Link>
+          </Button>
+          <Button variant="outlined" color="primary">
+            <Link to="/RecipesList">Recipes List!</Link>
           </Button>
         </div>
       </div>
@@ -255,7 +273,29 @@ export default function FullScreenDialog() {
           <input type="submit" value="Submit" />
         </form>
       </Dialog>
-      <RecipesList items={items} />
+      <Route
+        exact
+        path="/images"
+        render={() => <ImagesList imagesData={imagesData} />}
+      />
+      <Route
+        exact
+        path="/RecipesList"
+        render={() => <RecipesList items={items} recipeKeys={recipeKeys} />}
+      />
+      <Route
+        path={`/RecipesList/:productId`}
+        render={({ match }) => (
+          <RecipeDetail items={items} match={match} recipeKeys={recipeKeys} />
+        )}
+      />
+      <Route
+        path={`/images/:productId`}
+        render={({ match }) => (
+          <RecipeDetail items={items} match={match} recipeKeys={recipeKeys} />
+        )}
+      />
+      <Route exact path="/" render={() => <Home imagesData={imagesData} />} />
     </div>
   );
 }
