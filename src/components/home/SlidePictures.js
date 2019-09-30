@@ -18,7 +18,6 @@ const SlidePictures = ({ imagesData }) => {
             key={tile.id}
             style={{ maxHeight: '100%', maxWidth: '100%' }}
           />
-
           <h3 style={{ textAlign: 'center' }}>{tile.title}</h3>
         </div>
       );

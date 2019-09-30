@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -27,15 +27,22 @@ const RecipeItem = ({
   index,
   state,
   checkboxOnChange,
-  updateRecipe
+  signedin
 }) => {
   const classes = useStyles();
+  useEffect(() => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0;
+  }, []);
 
   return (
     <div>
       <Grid key={recipe.title} item className={classes.root}>
         <Card className={classes.card}>
-          <Link to={`/RecipesList/${recipe.id}`}>
+          <Link
+            to={`/RecipesList/${recipe.id}`}
+            style={{ textDecoration: 'none' }}
+          >
             <CardActionArea>
               <CardMedia
                 className={classes.media}
@@ -44,12 +51,17 @@ const RecipeItem = ({
               >
                 {!recipe.image && <Typography />}
               </CardMedia>
-              <CardContent>
+              <CardContent style={{ minHeight: 55 }}>
                 <Typography
                   gutterBottom
                   variant="h5"
                   component="h2"
                   noWrap={true}
+                  style={{
+                    font: 'italic 2vw "Fira Sans", serif',
+                    color: 'black',
+                    textAlign: 'center'
+                  }}
                 >
                   {recipe.title}
                 </Typography>
@@ -58,27 +70,37 @@ const RecipeItem = ({
                   color="textSecondary"
                   component="p"
                   noWrap={true}
+                  style={{
+                    font: 'italic 1vw "Fira Sans", serif'
+                  }}
                 >
                   {recipe.ingredients}
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Link>
-          <CardActions>
-            <Button size="small" color="primary" onClick={() => deleteRecipe()}>
-              DELETE
-            </Button>
-            <div>
-              <Checkbox
-                checked={state}
-                onChange={checkboxOnChange}
-                value="checkedA"
-                inputProps={{
-                  'aria-label': 'primary checkbox'
-                }}
-              />
-            </div>
-          </CardActions>
+          {signedin ? (
+            <CardActions>
+              <Button
+                size="small"
+                style={{ color: 'blueviolet' }}
+                onClick={() => deleteRecipe()}
+              >
+                DELETE
+              </Button>
+              <div>
+                <Checkbox
+                  checked={state}
+                  onChange={checkboxOnChange(index)}
+                  style={{ color: '#51e1e2a1' }}
+                  value="checkedA"
+                  inputProps={{
+                    'aria-label': 'primary checkbox'
+                  }}
+                />
+              </div>
+            </CardActions>
+          ) : null}
         </Card>
       </Grid>
     </div>

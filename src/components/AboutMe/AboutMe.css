@@ -1,0 +1,130 @@
+.divOne {
+  min-height: 900px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.divTwo {
+  width: 55vw;
+  min-width: 400px;
+  min-height: 400px;
+  height: 55vw;
+  position: absolute;
+  background-color: #3f51b561;
+  top: -10px;
+  right: 0px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transition: all 0.2s linear;
+  border: 5px solid #b5bee3;
+}
+.divThree {
+  width: 55vw;
+  min-width: 400px;
+  min-height: 400px;
+  height: 55vw;
+  position: absolute;
+  background-color: #ff68689e;
+  border-radius: 50%;
+  top: 130px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s linear;
+}
+.mainDiv {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 70%;
+  height: 800px;
+  min-width: 650px;
+  z-index: 1;
+  background-color: #00000054;
+  position: absolute;
+  border: 10px solid #fdfdfd66;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+}
+.imageTagMe {
+  width: 50%;
+  min-width: 200px;
+  height: auto;
+  border-radius: 50%;
+  border: 5px solid #f97781;
+}
+.divH1andImage {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
+}
+.pDiv {
+  width: 30vw;
+  font: italic 1.7vw 'Fira Sans', serif;
+  text-align: center;
+  color: #27136d;
+}
+.aboutMeh1 {
+  font: italic 200% 'Fira Sans', serif;
+  color: white;
+}
+.imageTagMe {
+  width: 50%;
+}
+@media (max-width: 700px) {
+  .pDiv {
+    width: 40vw;
+    font: italic 2vw 'Fira Sans', serif;
+  }
+  .divOne {
+    min-height: 500px;
+  }
+  .divThree {
+    left: 30px;
+  }
+  .divTwo {
+    right: 30px;
+  }
+}
+@media (max-width: 580px) {
+  .pDiv {
+    width: 50vw;
+    font: italic 2.4vw 'Fira Sans', serif;
+  }
+  .aboutMeh1 {
+    font: italic 5vw 'Fira Sans', serif;
+  }
+  .divThree {
+    left: 60px;
+  }
+  .divTwo {
+    right: 60px;
+  }
+}
+@media (max-width: 444px) {
+  .pDiv {
+    font: italic 2.9vw 'Fira Sans', serif;
+  }
+  .aboutMeh1 {
+    font: italic 7vw 'Fira Sans', serif;
+  }
+}
+@media (max-width: 340px) {
+  .pDiv {
+    width: 60%;
+    font: italic 80% 'Fira Sans', serif;
+  }
+  .aboutMeh1 {
+    font: italic 200% 'Fira Sans', serif;
+  }
+}

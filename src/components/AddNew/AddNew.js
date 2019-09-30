@@ -15,12 +15,18 @@ import { Close } from '@material-ui/icons';
 import { itemsRef, storage } from '../../firebase';
 import RecipesList from '../AllRecipes/RecipesList';
 import Header from '../Header';
+import AboutMe from '../AboutMe/AboutMe';
+import ApiSearch from '../OtherBlogs/ApiSearch';
 import ButtonAddNew from '../AddNew/ButtonAddNew';
 import ImagesList from '../ImagesOnly/ImagesList';
+import SignIn from '../SignIn';
+import Footer from '../Footer';
 import { Switch, Route, Link } from 'react-router-dom';
 import RecipeDetail from '../AllRecipes/RecipeDetail';
 import Home from '../home/Home';
-
+import buttonBlueImage from '../../nn.svg';
+import buttonGreenImage from '../../greenButton.svg';
+import mainBackground from '../../mainbackground.png';
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative'
@@ -31,6 +37,9 @@ const useStyles = makeStyles(theme => ({
   },
   textfield: {
     width: '80%'
+  },
+  imagesButton: {
+    textDecoration: 'none'
   }
 }));
 
@@ -53,7 +62,9 @@ export default function FullScreenDialog() {
   });
   const [items, setItems] = useState([]);
   const [recipeKeys, setRecipeKeys] = useState([]);
-  const imagesData = items.filter(item => (item.image ? true : false));
+  const [signedin, setSignedin] = useState(false);
+  const imagesDataFirst = items.filter(item => (item.image ? true : false));
+  const imagesData = imagesDataFirst.reverse();
 
   useEffect(() => {
     // code to run on component mount
@@ -81,6 +92,13 @@ export default function FullScreenDialog() {
       setItems(recipesWithId);
     });
   }, []);
+
+  const handleSignedin = () => {
+    setSignedin(true);
+  };
+  const handleNotSignedin = () => {
+    setSignedin(false);
+  };
 
   const handleImagePreviewUrl = () => {
     const { imagePreviewUrl } = fileImage;
@@ -178,24 +196,99 @@ export default function FullScreenDialog() {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${mainBackground})`,
+        backgroundAttachment: 'fixed',
+        minHeight: '100vw',
+        minWidth: 900,
+        display: 'flex',
+        flexDirection: 'column'
+      }}
+    >
       <div
         style={{
           display: 'flex',
           alignContent: 'center',
-          height: '175px'
+          flexDirection: 'column'
         }}
       >
-        <div style={{ height: '100%', width: '100%' }}>
-          <Header />
-
-          <ButtonAddNew handleClickOpen={handleClickOpen} />
-          <Button variant="outlined" color="primary">
-            <Link to="/images">Images List!</Link>
-          </Button>
-          <Button variant="outlined" color="primary">
-            <Link to="/RecipesList">Recipes List!</Link>
-          </Button>
+        <Header />
+        <div
+          style={{
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '2vw'
+          }}
+        >
+          <ButtonAddNew handleClickOpen={handleClickOpen} signedin={signedin} />
+          <div
+            style={{
+              position: 'relative',
+              width: '15%',
+              marginLeft: '3vw',
+              marginRight: '3vw'
+            }}
+          >
+            <Link style={{ textDecoration: 'none' }} to="/images">
+              <img
+                src={buttonBlueImage}
+                alt="buttonimage"
+                style={{
+                  width: '100%',
+                  display: 'block',
+                  height: 'auto'
+                }}
+              />
+              <div
+                style={{
+                  textAlign: 'center',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '100%',
+                  fontFamily: 'Annie Use Your Telescope',
+                  fontSize: '3.5vw',
+                  color: 'white',
+                  textShadow: '0 0 3px #25bef2, 0 0 5px #25bef2'
+                }}
+              >
+                IMAGES
+              </div>
+            </Link>
+          </div>
+          <div style={{ position: 'relative', width: '15%' }}>
+            <Link style={{ textDecoration: 'none' }} to="/RecipesList">
+              <img
+                src={buttonGreenImage}
+                alt="buttongreenimage"
+                style={{
+                  width: '100%',
+                  display: 'block',
+                  height: 'auto'
+                }}
+              />
+              <div
+                style={{
+                  textAlign: 'center',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '100%',
+                  fontFamily: 'Annie Use Your Telescope',
+                  fontSize: '3.1vw',
+                  color: 'white',
+                  textShadow: '0 0 3px #08c193, 0 0 5px #08c193'
+                }}
+              >
+                RECIPES
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
       <Dialog
@@ -273,29 +366,60 @@ export default function FullScreenDialog() {
           <input type="submit" value="Submit" />
         </form>
       </Dialog>
-      <Route
-        exact
-        path="/images"
-        render={() => <ImagesList imagesData={imagesData} />}
-      />
-      <Route
-        exact
-        path="/RecipesList"
-        render={() => <RecipesList items={items} recipeKeys={recipeKeys} />}
-      />
-      <Route
-        path={`/RecipesList/:productId`}
-        render={({ match }) => (
-          <RecipeDetail items={items} match={match} recipeKeys={recipeKeys} />
-        )}
-      />
-      <Route
-        path={`/images/:productId`}
-        render={({ match }) => (
-          <RecipeDetail items={items} match={match} recipeKeys={recipeKeys} />
-        )}
-      />
-      <Route exact path="/" render={() => <Home imagesData={imagesData} />} />
+      <div style={{ flexGrow: '1', marginBottom: '15vh' }}>
+        <Route
+          exact
+          path="/images"
+          render={() => <ImagesList imagesData={imagesData} />}
+        />
+        <Route
+          exact
+          path="/RecipesList"
+          render={() => (
+            <RecipesList
+              items={items}
+              recipeKeys={recipeKeys}
+              signedin={signedin}
+            />
+          )}
+        />
+        <Route
+          path={`/RecipesList/:productId`}
+          render={({ match }) => (
+            <RecipeDetail
+              items={items}
+              match={match}
+              recipeKeys={recipeKeys}
+              signedin={signedin}
+            />
+          )}
+        />
+        <Route
+          path={`/images/:productId`}
+          render={({ match }) => (
+            <RecipeDetail
+              items={items}
+              match={match}
+              recipeKeys={recipeKeys}
+              signedin={signedin}
+            />
+          )}
+        />
+        <Route exact path="/" render={() => <Home imagesData={imagesData} />} />
+        <Route exact path="/AboutMe" render={() => <AboutMe />} />
+        <Route
+          exact
+          path="/signin"
+          render={() => (
+            <SignIn
+              onSignedin={handleSignedin}
+              onSignedout={handleNotSignedin}
+            />
+          )}
+        />
+        <Route exact path="/OtherBlogs" render={() => <ApiSearch />} />
+      </div>
+      <Footer />
     </div>
   );
 }

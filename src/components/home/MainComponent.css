@@ -1,0 +1,64 @@
+.pinkArrow {
+  position: absolute;
+  left: 70%;
+  top: 0px;
+  transform: scaleX(-1);
+  width: 15%;
+}
+.yellowArrow {
+  position: absolute;
+  left: 50%;
+  transform: rotate(47deg) scaleX(-1);
+  width: 13%;
+  bottom: -11%;
+}
+.blueArrow {
+  position: absolute;
+  left: 42%;
+  transform: rotate(292deg);
+  top: 37px;
+  width: 12%;
+}
+.aquaArrow {
+  position: absolute;
+  transform: rotate(275deg);
+  left: 8%;
+  top: 600px;
+  width: 13%;
+}
+.purpleArrow {
+  position: absolute;
+  left: 65%;
+  /* top: 750px; */
+  transform: rotate(345deg);
+  width: 10%;
+  bottom: -15%;
+}
+.getInspired {
+  position: absolute;
+  width: 54%;
+  left: 19%;
+  top: 6vw;
+}
+.browseRecipes {
+  position: absolute;
+  width: 60%;
+  left: 50%;
+  top: 16vw;
+  transform: rotate(-21deg);
+}
+.moreYum {
+  position: absolute;
+  width: 31%;
+  bottom: 3vw;
+  left: 38%;
+  transform: rotate(335deg);
+}
+.aboutMe {
+  position: absolute;
+  /* top: 600px; */
+  width: 31%;
+  bottom: 7vw;
+  left: 65%;
+  transform: rotate(11deg);
+}

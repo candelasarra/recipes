@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RecipeDetail = ({ items, match, recipeKeys }) => {
+const RecipeDetail = ({ items, match, recipeKeys, signedin }) => {
   const [open, setOpen] = useState(false);
   const [recipe, setRecipe] = useState({
     title: '',
@@ -158,7 +158,6 @@ const RecipeDetail = ({ items, match, recipeKeys }) => {
     const { ingredients, title, image, procedure, amount } = items[index];
     const ingredientsArr = ingredients.split(',');
     const ingredientsList = ingredientsArr.map(i => <li>{i}</li>);
-
     console.log(ingredientsArr);
     console.log(index);
     return (
@@ -247,19 +246,116 @@ const RecipeDetail = ({ items, match, recipeKeys }) => {
             </form>
           </Dialog>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ width: '80%', background: 'pink' }}>
-            <Button color="inherit" onClick={handleClickOpen}>
-              UPDATE RECIPE
-            </Button>
-            <h1>{title}</h1>
-            <h3>INGREDIENTS</h3>
-            <ul>{ingredientsList}</ul>
-            <h3>PROCEDURE</h3>
-            <h4>{procedure}</h4>
-            {image ? (
-              <img src={image} alt={title} style={{ maxWidth: '100%' }} />
+        <div
+          id="background"
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <div
+            style={{
+              width: '70%',
+              height: '100%',
+              backgroundColor: 'aliceblue',
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              borderRadius: '50px',
+              alignItems: 'center',
+              border: '#13258a0d solid'
+            }}
+            id="background"
+          >
+            {signedin ? (
+              <div
+                style={{
+                  height: '25px',
+                  marginLeft: '5%',
+                  marginTop: '2%',
+                  alignSelf: 'flex-start'
+                }}
+              >
+                <Button
+                  color="inherit"
+                  onClick={handleClickOpen}
+                  style={{ color: '#453b50ad' }}
+                >
+                  UPDATE
+                </Button>
+              </div>
             ) : null}
+            <div
+              style={{
+                width: '90%',
+                height: 'auto',
+                backgroundColor: 'white',
+                margin: '5%',
+                borderRadius: '12px',
+                border: '10px outset #c47eff80'
+              }}
+            >
+              {image ? (
+                <img
+                  id="i"
+                  src={image}
+                  alt={title}
+                  style={{ width: '40%', float: 'right', padding: '10px' }}
+                />
+              ) : null}
+              <h1
+                style={{
+                  textAlign: 'center',
+                  font: 'italic 50px "Fira Sans", serif',
+                  color: '#4b4e54'
+                }}
+              >
+                {title}
+              </h1>
+              <div style={{ paddingLeft: '10px' }}>
+                <hr
+                  style={{
+                    border: '0',
+                    height: '1px',
+                    backgroundImage:
+                      'linear-gradient(to right, rgba(0, 0, 0, 0), #c47eff80, rgba(0, 0, 0, 0))'
+                  }}
+                />
+                <h3
+                  style={{ font: '1.2em "Fira Sans", serif', color: '#60646b' }}
+                >
+                  INGREDIENTS
+                </h3>
+                <ul
+                  style={{
+                    listStyleImage:
+                      'url(https://image.flaticon.com/icons/svg/535/535285.svg)',
+                    color: '#6975b7'
+                  }}
+                >
+                  {ingredientsList}
+                </ul>
+                <hr
+                  style={{
+                    border: '0',
+                    height: '1px',
+                    backgroundImage:
+                      'linear-gradient(to right, rgba(0, 0, 0, 0), #c47eff80, rgba(0, 0, 0, 0))'
+                  }}
+                />
+                <h3
+                  style={{ font: '1.2em "Fira Sans", serif', color: '#60646b' }}
+                >
+                  PROCEDURE
+                </h3>
+                <h3
+                  style={{
+                    font: '1em "Fira Sans", serif',
+                    color: '#6975b7',
+                    paddingInlineStart: '35px'
+                  }}
+                >
+                  {procedure}
+                </h3>
+              </div>
+            </div>
           </div>
         </div>
       </div>
