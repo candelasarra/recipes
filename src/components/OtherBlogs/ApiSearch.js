@@ -167,20 +167,40 @@ const ApiSearch = () => {
       <div className="SideDiv" style={style.styleSideDiv} />
       <div className="HorizontalDiv" style={style.styleHorizontalDiv} />
       <div style={style.styleBigDiv} />
-      <div style={style.blogsThatInspireDiv}>
-        <p style={style.blogsThatInspire.pTag}>
+      <div style={style.blogsThatInspireDiv.div}>
+        <p style={style.blogsThatInspireDiv.pTag}>
           Awesome Blogs That Inspire Me:
         </p>
-        <a href="https://www.feastingonfruit.com/" target="_blank">
+        <a
+          href="https://www.feastingonfruit.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={style.blogsThatInspireDiv.href1}
+        >
           Feasting On Fruit
         </a>
-        <a href="https://www.veganricha.com/" target="_blank">
+        <a
+          href="https://www.veganricha.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={style.blogsThatInspireDiv.href2}
+        >
           Vegan Richa
         </a>
-        <a href="https://ohsheglows.com/" target="_blank">
+        <a
+          href="https://ohsheglows.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={style.blogsThatInspireDiv.href3}
+        >
           Oh She Glows
         </a>
-        <a href="https://sweetsimplevegan.com/" target="_blank">
+        <a
+          href="https://sweetsimplevegan.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={style.blogsThatInspireDiv.href4}
+        >
           Sweet Simple Vegan
         </a>
       </div>
