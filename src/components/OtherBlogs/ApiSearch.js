@@ -95,47 +95,47 @@ const ApiSearch = () => {
       color: '#0895ff',
       fontWeight: 'bolder'
     },
-    blogsThatInspireDiv:{
-     div: {
-      width: '26%',
-      height: '100vh',
-      marginLeft: '10px',
-      display: 'flex',
-      justifyContent: 'center',
-      top: 99,
-      position: 'absolute'
-    },
-    pTag: {
-      position: 'absolute',
-      font: 'italic 3vh 'Fira Sans', serif',
-      color: '#e2e1ff',
-      margin: 10
-    },
-    href1: {
-      position: 'absolute',
-      top: '10%',
-      font: 'italic 3vh 'Fira Sans', serif',
-      color: '#ebff00'
-    },
-    href2: {
-      position: 'absolute',
-      top: '20%',
-      font: 'italic 3vh 'Fira Sans', serif',
-      color: '#ebff00'
-    },
-    href3: {
-      position: 'absolute',
-      top: '30%',
-      font: 'italic 3vh 'Fira Sans', serif',
-      color: '#ebff00'
-    },
-    href4: {
-      position: 'absolute',
-      top: '40%',
-      font: 'italic 3vh 'Fira Sans', serif',
-      color: '#ebff00'
+    blogsThatInspireDiv: {
+      div: {
+        width: '26%',
+        height: '100vh',
+        marginLeft: '10px',
+        display: 'flex',
+        justifyContent: 'center',
+        top: 99,
+        position: 'absolute'
+      },
+      pTag: {
+        position: 'absolute',
+        font: 'italic 3vh "Fira Sans", serif',
+        color: '#e2e1ff',
+        margin: 10
+      },
+      href1: {
+        position: 'absolute',
+        top: '10%',
+        font: 'italic 3vh "Fira Sans", serif',
+        color: '#ebff00'
+      },
+      href2: {
+        position: 'absolute',
+        top: '20%',
+        font: 'italic 3vh "Fira Sans", serif',
+        color: '#ebff00'
+      },
+      href3: {
+        position: 'absolute',
+        top: '30%',
+        font: 'italic 3vh "Fira Sans", serif',
+        color: '#ebff00'
+      },
+      href4: {
+        position: 'absolute',
+        top: '40%',
+        font: 'italic 3vh "Fira Sans", serif',
+        color: '#ebff00'
+      }
     }
-    } 
   };
   const handleChange = e => {
     setValue(e.target.value);
@@ -168,11 +168,21 @@ const ApiSearch = () => {
       <div className="HorizontalDiv" style={style.styleHorizontalDiv} />
       <div style={style.styleBigDiv} />
       <div style={style.blogsThatInspireDiv}>
-        <p style={style.blogsThatInspire.pTag}>Awesome Blogs That Inspire Me:</p>
-        <a href="https://www.feastingonfruit.com/" target="_blank">Feasting On Fruit</a>
-        <a href="https://www.veganricha.com/" target="_blank">Vegan Richa</a>
-        <a href="https://ohsheglows.com/" target="_blank">Oh She Glows</a>
-        <a href="https://sweetsimplevegan.com/" target="_blank">Sweet Simple Vegan</a>
+        <p style={style.blogsThatInspire.pTag}>
+          Awesome Blogs That Inspire Me:
+        </p>
+        <a href="https://www.feastingonfruit.com/" target="_blank">
+          Feasting On Fruit
+        </a>
+        <a href="https://www.veganricha.com/" target="_blank">
+          Vegan Richa
+        </a>
+        <a href="https://ohsheglows.com/" target="_blank">
+          Oh She Glows
+        </a>
+        <a href="https://sweetsimplevegan.com/" target="_blank">
+          Sweet Simple Vegan
+        </a>
       </div>
       <div style={style.divFindRecipes}>
         <TextField
