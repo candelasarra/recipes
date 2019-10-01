@@ -1,5 +1,6 @@
 {
   "name": "recipes",
+  "homepage": "http://candelasrecipes.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -205,6 +205,11 @@ const ApiSearch = () => {
         </a>
       </div>
       <div style={style.divFindRecipes}>
+        <div
+          id="edamam-badge"
+          data-color="badge"
+          style={{ position: 'absolute', left: '-175px' }}
+        ></div>
         <TextField
           id="standard-with-placeholder"
           label="Find A New Recipe!"
