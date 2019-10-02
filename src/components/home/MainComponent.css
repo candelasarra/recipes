@@ -1,9 +1,9 @@
 .pinkArrow {
   position: absolute;
   left: 70%;
-  top: 0px;
+  top: -2%;
   transform: scaleX(-1);
-  width: 15%;
+  width: 12%;
 }
 .yellowArrow {
   position: absolute;
@@ -16,7 +16,7 @@
   position: absolute;
   left: 42%;
   transform: rotate(292deg);
-  top: 37px;
+  top: 16px;
   width: 12%;
 }
 .aquaArrow {
@@ -42,9 +42,9 @@
 }
 .browseRecipes {
   position: absolute;
-  width: 60%;
+  width: 48%;
   left: 50%;
-  top: 16vw;
+  top: 19%;
   transform: rotate(-21deg);
 }
 .moreYum {
