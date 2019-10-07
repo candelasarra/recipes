@@ -6,22 +6,29 @@ const Header = () => {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        fontFamily: 'Annie Use Your Telescope',
-        fontSize: '3vw',
-        flexShrink: '0'
+        fontFamily: 'Annie Use Your Telescope'
       }}
     >
-      <Link style={{ textDecoration: 'none' }} to="/">
-        <h1
-          style={{
-            textShadow:
-              'rgba(23, 80, 243, 0.58) 0px 0px 10px, rgb(255, 255, 255) 0px 0px 10px',
-            color: 'black'
-          }}
-        >
-          MY RECIPES!
-        </h1>
-      </Link>
+      <div
+        style={{
+          position: 'relative',
+          minWidth: 500
+        }}
+      >
+        <Link style={{ textDecoration: 'none', fontSize: '489%' }} to="/">
+          <h1
+            style={{
+              textShadow:
+                'rgba(23, 80, 243, 0.58) 0px 0px 10px, rgb(255, 255, 255) 0px 0px 10px',
+              color: 'black',
+              textAlign: 'center',
+              fontSize: 'inherit'
+            }}
+          >
+            THE RECIPES
+          </h1>
+        </Link>
+      </div>
     </div>
   );
 };

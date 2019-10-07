@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import MyImage from '../../unnamed.png';
 import './AboutMe.css';
-import { Zoom, Slide } from '@material-ui/core';
+import { Zoom } from '@material-ui/core';
 
 const AboutMe = () => {
   const [checked, setChecked] = useState(false);
@@ -23,18 +23,13 @@ const AboutMe = () => {
             <h1 className="aboutMeh1">Candela Sarrabayrouse</h1>
           </div>
           <div className="pDiv">
-            Hi there! I welcome you to the website that I've created and
-            designed from scratch to show you my collection of recipes.
+            Hi there! I welcome you to the website that I've created to show you
+            my collection of recipes.
             <br />
-            This is my first web app as a self-taught software developer and I
-            am so happy you are here to see it. I've built it by using React (w/
-            hooks :) ), React Router, Firebase (Authentication, Realtime,
-            Storage) and Material UI.
+            I've built it by using React (w/ hooks :) ), React Router, Firebase
+            (Authentication, Realtime, Storage) and Material UI.
             <br />
-            Plant-based baking is one of the activities that I enjoy the most
-            and I hope you enojoy these recipes as much as I do! Making sweets
-            is my favorite but you might come across some salty food recipes as
-            well!
+            I hope you enjoy browsing through my recipes.
             <br />
             Feel free to e-mail me with any feedback at
             sarrabayrouse.business@gmail.com

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Button,
   TextField,
   Dialog,
   AppBar,
@@ -21,7 +20,7 @@ import ButtonAddNew from '../AddNew/ButtonAddNew';
 import ImagesList from '../ImagesOnly/ImagesList';
 import SignIn from '../SignIn';
 import Footer from '../Footer';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import RecipeDetail from '../AllRecipes/RecipeDetail';
 import Home from '../home/Home';
 import buttonBlueImage from '../../nn.svg';
@@ -114,9 +113,6 @@ export default function FullScreenDialog() {
     return null;
   };
 
-  function checkRecipes() {
-    console.log(items);
-  }
   function handleClickOpen() {
     setOpen(true);
   }
@@ -157,7 +153,6 @@ export default function FullScreenDialog() {
         function() {
           uploadTask.snapshot.ref.getDownloadURL().then(function(URL) {
             uploadToDatabase(URL);
-            console.log('File available at', URL);
           });
         }
       );
@@ -251,7 +246,7 @@ export default function FullScreenDialog() {
                   transform: 'translate(-50%, -50%)',
                   width: '100%',
                   fontFamily: 'Annie Use Your Telescope',
-                  fontSize: '3.5vw',
+                  fontSize: '252%',
                   color: 'white',
                   textShadow: '0 0 3px #25bef2, 0 0 5px #25bef2'
                 }}
@@ -260,7 +255,7 @@ export default function FullScreenDialog() {
               </div>
             </Link>
           </div>
-          <div style={{ position: 'relative', width: '15%' }}>
+          <div style={{ position: 'relative', width: '17%' }}>
             <Link style={{ textDecoration: 'none' }} to="/RecipesList">
               <img
                 src={buttonGreenImage}
@@ -280,7 +275,7 @@ export default function FullScreenDialog() {
                   transform: 'translate(-50%, -50%)',
                   width: '100%',
                   fontFamily: 'Annie Use Your Telescope',
-                  fontSize: '3.1vw',
+                  fontSize: '247%',
                   color: 'white',
                   textShadow: '0 0 3px #08c193, 0 0 5px #08c193'
                 }}
@@ -311,9 +306,6 @@ export default function FullScreenDialog() {
               <Typography variant="h6" className={classes.title}>
                 Add New Recipe!
               </Typography>
-              <Button color="inherit" onClick={checkRecipes}>
-                Save
-              </Button>
             </Toolbar>
           </AppBar>
           <TextField

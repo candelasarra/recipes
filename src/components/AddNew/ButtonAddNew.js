@@ -30,7 +30,7 @@ const ButtonAddNew = ({ handleClickOpen, signedin }) => {
       transform: 'translate(-47%, -43%)',
       width: '100%',
       fontFamily: 'Annie Use Your Telescope',
-      fontSize: '3.7vw',
+      fontSize: '302%',
       color: 'white',
       textShadow: '0 0 3px #d45ad8, 0 0 5px #d45ad8',
       cursor: 'pointer',

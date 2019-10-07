@@ -6,12 +6,10 @@ const SignIn = ({ onSignedin, onSignedout }) => {
   const email = useFormInput();
   const password = useFormInput();
 
-  const {
-    loginError,
-    user,
-    submitted,
-    onSubmit: handleSubmit
-  } = useFirebaseSignIn(email.value, password.value);
+  const { user, onSubmit: handleSubmit } = useFirebaseSignIn(
+    email.value,
+    password.value
+  );
 
   useEffect(() => {
     if (user) {

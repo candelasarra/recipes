@@ -9,7 +9,6 @@ import {
   Typography,
   Slide
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Close } from '@material-ui/icons';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -140,7 +139,6 @@ const RecipeDetail = ({ items, match, recipeKeys, signedin }) => {
         function() {
           uploadTask.snapshot.ref.getDownloadURL().then(function(URL) {
             updateDatabase(URL);
-            console.log('File available at', URL);
           });
         }
       );
@@ -150,16 +148,12 @@ const RecipeDetail = ({ items, match, recipeKeys, signedin }) => {
       updateDatabase();
     }
   }
-  function checkRecipes() {
-    console.log(items);
-  }
 
   if (items.length) {
     const { ingredients, title, image, procedure, amount } = items[index];
     const ingredientsArr = ingredients.split(',');
-    const ingredientsList = ingredientsArr.map(i => <li>{i}</li>);
-    console.log(ingredientsArr);
-    console.log(index);
+    const ingredientsList = ingredientsArr.map(i => <li key={i}>{i}</li>);
+
     return (
       <div>
         <div>
@@ -183,9 +177,6 @@ const RecipeDetail = ({ items, match, recipeKeys, signedin }) => {
                   <Typography variant="h6" className={classes.title}>
                     Add New Recipe!
                   </Typography>
-                  <Button color="inherit" onClick={checkRecipes}>
-                    Save
-                  </Button>
                 </Toolbar>
               </AppBar>
               <TextField

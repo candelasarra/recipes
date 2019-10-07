@@ -30,10 +30,6 @@ const RecipeItem = ({
   signedin
 }) => {
   const classes = useStyles();
-  useEffect(() => {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0;
-  }, []);
 
   return (
     <div>

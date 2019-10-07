@@ -15,15 +15,22 @@ const RecipesList = ({ items, recipeKeys, signedin }) => {
     water: false
   });
   const [searchValue, setSearchValue] = useState('');
-  useEffect(()=>{    
-    document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; 
-  },[])
+  const [opened, setOpened] = useState(false);
+
+  useEffect(() => {
+    setOpened(true);
+    if (opened === false) {
+      console.log('inside first use effect i am scrolling');
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0;
+    }
+  }, [opened]);
 
   useEffect(() => {
     setFiltered(items);
   }, [items]);
   useEffect(() => {
+    console.log(opened);
     let newItems = [];
     const switchArray = Object.values(switches);
     if (switchArray.find(item => item === true)) {
@@ -140,14 +147,13 @@ const RecipesList = ({ items, recipeKeys, signedin }) => {
     <div>
       <div
         style={{
-                display: 'flex',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                marginTop: '1vw',
-                marginBottom: '2vw'
-              }
-        }
-     > 
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          marginTop: '1vw',
+          marginBottom: '2vw'
+        }}
+      >
         {signedin ? (
           <div>
             <Button
@@ -189,9 +195,8 @@ const RecipesList = ({ items, recipeKeys, signedin }) => {
               border: '0',
               padding: '0',
               color: 'white',
-              fontSize: '1.2vw',
               outline: 'none',
-              font: 'italic 2vw "Fira Sans", serif',
+              font: 'italic 145% "Fira Sans", serif',
               width: '100%'
             }}
           />
@@ -206,7 +211,7 @@ const RecipesList = ({ items, recipeKeys, signedin }) => {
           <h3
             style={{
               textAlign: 'center',
-              font: 'italic 2vw "Fira Sans", serif',
+              font: 'italic 145% "Fira Sans", serif',
               padding: '0.3vw',
               borderRadius: '7px',
               boxShadow: '0 5px 30px #ff7c7c, 0 0 0 10px #ffffffeb',

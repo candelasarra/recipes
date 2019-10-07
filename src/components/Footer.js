@@ -17,12 +17,12 @@ const Footer = () => {
     alignItems: 'center'
   };
   const styleP = {
-    font: 'italic 2.5vh "Fira Sans", serif',
+    font: 'italic 19px "Fira Sans", serif',
     color: 'cornflowerblue',
     textAlign: 'center'
   };
   const stylePaboutme = {
-    font: 'italic 2.5vh "Fira Sans", serif',
+    font: 'italic 19px "Fira Sans", serif',
     color: 'cornflowerblue',
     fontWeight: 'bold',
     textAlign: 'center'
@@ -30,6 +30,18 @@ const Footer = () => {
 
   return (
     <div style={styleDiv}>
+      <Link style={{ textDecoration: 'none' }} to="/signin">
+        <button
+          style={{
+            backgroundColor: 'transparent',
+            width: '5px',
+            height: '5px',
+            padding: '0px',
+            margin: '0',
+            borderColor: '#5fe896'
+          }}
+        ></button>
+      </Link>
       <div style={styleInnerDiv}>
         <Link style={{ textDecoration: 'none' }} to="/RecipesList">
           <p style={styleP}>Recipes List</p>

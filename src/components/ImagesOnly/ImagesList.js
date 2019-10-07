@@ -17,7 +17,6 @@ const ImagesList = ({ imagesData }) => {
   }, []);
 
   useEffect(() => {
-    console.log(numberOfPages);
     if ((page === 1 || page === 2) & (numberOfPages >= 3)) {
       setRightButton(3);
       setCenterButton(2);
@@ -77,7 +76,6 @@ const ImagesList = ({ imagesData }) => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0;
   };
-  console.log(imagesData);
 
   const firstPrevious = () => {
     if (page === 1) {
@@ -132,6 +130,7 @@ const ImagesList = ({ imagesData }) => {
                   return (
                     <div
                       className={imagesData.length > 12 ? 'image' : 'image2'}
+                      key={tile.id}
                     >
                       <Link to={`/images/${tile.id}`}>
                         <img

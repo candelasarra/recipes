@@ -150,14 +150,11 @@ const ApiSearch = () => {
       const resp = await fetch(url);
       const recipes = await resp.json();
       setToBeRedered(
-        recipes.hits.map(item => {
-          return <ApiSearchCard item={item} key={item.url} />;
+        recipes.hits.map((item, index) => {
+          return <ApiSearchCard item={item} key={index} />;
         })
       );
-
-      console.log(recipes);
     } catch (e) {
-      console.log('e with fetching');
       throw e;
     }
   }
