@@ -15,22 +15,16 @@ const RecipesList = ({ items, recipeKeys, signedin }) => {
     water: false
   });
   const [searchValue, setSearchValue] = useState('');
-  const [opened, setOpened] = useState(false);
 
   useEffect(() => {
-    setOpened(true);
-    if (opened === false) {
-      console.log('inside first use effect i am scrolling');
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0;
-    }
-  }, [opened]);
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0;
+  }, []);
 
   useEffect(() => {
     setFiltered(items);
   }, [items]);
   useEffect(() => {
-    console.log(opened);
     let newItems = [];
     const switchArray = Object.values(switches);
     if (switchArray.find(item => item === true)) {
